@@ -5,6 +5,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require('passport');
+const sgMail = require('@sendgrid/mail');
+
+// Load input validation
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 // Load User model
 const User = require("../../models/User");
@@ -22,9 +27,28 @@ router.get("/test", (req, res) => {
 // @desc   Register user
 // @access Public
 router.post("/register", (req, res) => {
+  const {errors, isValid} = validateRegisterInput(req.body);
+
+  // Check validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
   User.findOne({ email: req.body.email }).then(user => {
-    if (user) return res.status(400).json({ email: "Email already exists" });
-    else {
+    if (user) {
+      errors.email = 'Email already exists.'
+      return res.status(400).json(errors);
+    } else {
+
+      const msgEmail = {
+        to: req.body.email,
+        from: 'danielgudu22@gmail.com',
+        subject: 'Welcome to the community!',
+        text: 'The people of DEV.community are so proud of you arrive to the community :)'
+      }
+
       const avatar = gravatar.url(req.body.email, {
         s: "200", // Size
         r: "pg", // Rating
@@ -42,9 +66,11 @@ router.post("/register", (req, res) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
+          newUser.save()
+            .then(user => {
+              res.json(user)
+              sgMail.send(msgEmail);
+            })
             .catch(err => console.log(err));
         });
       });
@@ -56,6 +82,13 @@ router.post("/register", (req, res) => {
 // @desc   Login user / Returning Token
 // @access Public
 router.post("/login", (req, res) => {
+  const {errors, isValid} = validateLoginInput(req.body);
+
+  // Check validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -63,7 +96,8 @@ router.post("/login", (req, res) => {
   User.findOne({ email }).then(user => {
     // Check for user
     if (!user) {
-      return res.status(404).json({ email: "User not found" });
+      errors.email = 'User not found'
+      return res.status(404).json(errors);
     }
 
     // Check password
@@ -85,8 +119,10 @@ router.post("/login", (req, res) => {
             });
           }
         );
-      } else 
-        return res.status(400).json({ password: "Password incorrect" });
+      } else {
+        errors.password = 'Password incorrect'
+        return res.status(400).json(errors);
+      }
     });
   });
 });
