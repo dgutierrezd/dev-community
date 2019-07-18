@@ -34,7 +34,7 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
@@ -69,7 +69,7 @@ router.post("/register", (req, res) => {
           newUser.save()
             .then(user => {
               res.json(user)
-              sgMail.send(msgEmail);
+              // sgMail.send(msgEmail);
             })
             .catch(err => console.log(err));
         });
