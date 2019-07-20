@@ -23,7 +23,7 @@ router.get("/test", (req, res) => {
   });
 });
 
-// @route  GET api/users/register
+// @route  POST api/users/register
 // @desc   Register user
 // @access Public
 router.post("/register", (req, res) => {
@@ -68,7 +68,7 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser.save()
             .then(user => {
-              res.json(user)
+              res.json(user).status(201)
               // sgMail.send(msgEmail);
             })
             .catch(err => console.log(err));
