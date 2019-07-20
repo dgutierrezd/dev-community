@@ -4,7 +4,7 @@ img {
 
 .landing {
   position: relative;
-  background: url('./img/coding.jpeg') no-repeat;
+  background: url('../img/coding.jpeg') no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
