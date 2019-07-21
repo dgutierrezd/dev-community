@@ -14,12 +14,17 @@ const Register = props => {
     const [passwordConfirm, savePasswordConfirm] = useState('');
     const [error, saveErrors] = useState({});
 
-    const {errors} = props;
+    
+    const {auth, history, errors} = props;
 
-    // componentWillReceiveProps - Check errors
-    useEffect(() => {
+	// componentWillReceiveProps - Check errors
+	useEffect(() => {
+		if(auth.isAuthenticated) {
+			history.push('/dashboard');
+        }
+        
         saveErrors(errors)
-    }, [errors])
+	}, [auth, history, errors])
 
     const registerUser = e => {
         e.preventDefault();
