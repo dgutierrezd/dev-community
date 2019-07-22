@@ -22,7 +22,8 @@ const Landing = props => {
                     <div className="row">
                         <div className="col-md-12 text-center">
                             <h1 className="display-3 mb-4">DEV Community</h1>
-                            <p className="lead">Create a developer profile/portfolio, share posts and get help from other developers.</p>
+                            <p className="lead">A social platform to developer of all areas, where you can meet people, share and help. <br/>
+                                                Create your Dev profile and join to our community.</p>
                             <hr />
                             <div>
                                 <Link to="/register" className="btn btn-lg btn-primary my-2">Sign Up</Link>

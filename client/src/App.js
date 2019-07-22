@@ -1,5 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// Private Route
+import PrivateRoute from './components/tools/PrivateRoute';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import {setCurrentUser} from './actions/authActions';
@@ -11,11 +13,14 @@ import store from './store';
 import './css/App.css';
 // Layout components
 import NavBar from './components/layout/NavBar';
-import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 // Auth components
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+// Profiles components
+import Dashboard from './components/dashboard/Dashboard';
+import CreateProfile from './components/profile/CreateProfile';
+
 
 // Check for token
 if(localStorage.jwtToken) {
@@ -37,8 +42,14 @@ function App() {
           <div className="container">
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Switch>
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path='/profile/create' component={CreateProfile} />
+            </Switch>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     </Provider>
