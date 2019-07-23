@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS} from './types';
+import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER} from './types';
+import Swal from 'sweetalert2';
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -29,6 +30,40 @@ export const createProfile = (profileData, history) => dispatch => {
                 payload: err.response.data
             })    
         )
+}
+
+// Delete full account
+export const deleteAccount = () => dispatch => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete account!'
+    }).then((result) => {
+        if (result.value) {
+            axios.delete('/api/profile')
+                .then(res =>
+                    dispatch({
+                        type: SET_CURRENT_USER,
+                        payload: {}
+                    })
+                )
+                .catch(err =>
+                    dispatch({
+                        type: GET_ERRORS,
+                        payload: err.response.data
+                    })
+                )
+            Swal.fire(
+                'Deleted!',
+                'Your account has been deleted.',
+                'success'
+            )
+        }
+    })
 }
 
 // Profile loading

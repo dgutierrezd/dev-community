@@ -69,7 +69,7 @@ const CreateProfile = props => {
                             })}
                             placeholder="Username or Handle *" name="handle" onChange={e => saveHandle(e.target.value)} />
                         {error.handle && (<div className="invalid-feedback">{error.handle}</div>)}
-                        <small className="form-text text-muted">A unique handle or username for your profile URL. Your full name, company name, nickname, etc (This CAN'T be changed later)</small>
+                        <small className="form-text text-muted">A unique handle or username for your profile URL. Your full name, company name, nickname, etc.</small>
                     </div>
                     <div className="form-group">
                     <textarea className={classnames("form-control", {
