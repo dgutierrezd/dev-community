@@ -169,8 +169,10 @@ router.post('/experience', passport.authenticate('jwt', {session: false}), (req,
         title: req.body.title,
         company: req.body.company,
         location: req.body.location,
-        from: req.body.from,
-        to: req.body.to,
+        monthStart: req.body.monthStart,
+        yearStart: req.body.yearStart,
+        monthFinish: req.body.monthFinish,
+        yearFinish: req.body.yearFinish,
         current: req.body.current,
         description: req.body.description
       }
@@ -201,8 +203,8 @@ router.post('/education', passport.authenticate('jwt', {session: false}), (req, 
         school: req.body.school,
         degree: req.body.degree,
         fieldOfStudy: req.body.fieldOfStudy,
-        from: req.body.from,
-        to: req.body.to,
+        yearStart: req.body.yearStart,
+        yearFinish: req.body.yearFinish,
         current: req.body.current,
         description: req.body.description
       }

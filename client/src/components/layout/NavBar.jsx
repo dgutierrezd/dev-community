@@ -61,7 +61,7 @@ const NavBar = props => {
     isAuthenticated ? initialRoute = '#' : initialRoute = '/'
 
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+        <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
             <div className="container">
                 <Link className="navbar-brand" to={initialRoute}>
                     <img className="rounded-circle" src={icon} alt="icon" title="DEV community" style={{ width: '25px', marginRight: '5px' }} />{' '}

@@ -51,6 +51,45 @@ const CreateProfile = props => {
         props.createProfile(profileData, history);
     }
 
+    const statusArray = [
+        {
+            "value": "0",
+            "text": "Select Professional Status" 
+        },
+        {
+            "value": "Developer",
+            "text": "Developer" 
+        },
+        {
+            "value": "Junior Developer",
+            "text": "Junior Developer" 
+        },
+        {
+            "value": "Senior Developer",
+            "text": "Senior Developer" 
+        },
+        {
+            "value": "Manager",
+            "text": "Manager" 
+        },
+        {
+            "value": "Student or Learning",
+            "text": "Student or Learning" 
+        },
+        {
+            "value": "Instructor or Teacher",
+            "text": "Instructor or Teacher" 
+        },
+        {
+            "value": "Intern",
+            "text": "Intern" 
+        },
+        {
+            "value": "Other",
+            "text": "Other" 
+        }
+    ]
+
     return (
         <div className="create-profile">
             <div className="container">
@@ -84,15 +123,9 @@ const CreateProfile = props => {
                                 'is-invalid': error.status
                             })} 
                             name="status" onChange={e => saveStatus(e.target.value)}>
-                            <option value="0">Select Professional Status *</option>
-                            <option value="Developer">Developer</option>
-                            <option value="Junior Developer">Junior Developer</option>
-                            <option value="Senior Developer">Senior Developer</option>
-                            <option value="Manager">Manager</option>
-                            <option value="Student or Learning">Student or Learning</option>
-                            <option value="Instructor">Instructor or Teacher</option>
-                            <option value="Intern">Intern</option>
-                            <option value="Other">Other</option>
+                            {statusArray.map(stat => (
+                                <option value={stat.value}>{stat.text}</option>
+                            ))}
                         </select>
                         {error.status && (<div className="invalid-feedback">{error.status}</div>)}
                         <small className="form-text text-muted">Give us an idea of where you are at in your career.</small>

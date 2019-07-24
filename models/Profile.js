@@ -48,12 +48,19 @@ const ProfileSchema = new Schema({
             location: {
                 type: String
             },
-            from: {
-                type: Date,
+            monthStart: {
+                type: String,
                 required: true
             },
-            to: {
-                type: Date
+            yearStart: {
+                type: String,
+                required: true
+            },
+            monthFinish: {
+                type: String
+            },
+            yearFinish: {
+                type: String
             },
             current: {
                 type: Boolean,
@@ -78,12 +85,13 @@ const ProfileSchema = new Schema({
                 type: String,
                 required: true
             },
-            from: {
-                type: Date,
+            yearStart: {
+                type: String,
                 required: true
             },
-            to: {
-                type: Date
+            yearFinish: {
+                type: String,
+                required: true
             },
             current: {
                 type: Boolean,

@@ -32,6 +32,118 @@ export const createProfile = (profileData, history) => dispatch => {
         )
 }
 
+// Add experience
+export const addExperience = (expData, history) => dispatch => {
+    axios.post('/api/profile/experience', expData)    
+        .then(res => {
+            Swal.fire({
+                position: 'center',
+                type: 'success',
+                title: 'Experience saved',
+                text: 'The experience was save succesfully.',
+                showConfirmButton: false,
+                timer: 2000
+            })   
+            history.push('/dashboard')
+        })
+        .catch(err => 
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
+}
+
+// Add experience
+export const addEducation = (eduData, history) => dispatch => {
+    axios.post('/api/profile/education', eduData)    
+        .then(res => {
+            Swal.fire({
+                position: 'center',
+                type: 'success',
+                title: 'Education saved',
+                text: 'Your achievement was save succesfully.',
+                showConfirmButton: false,
+                timer: 2000
+            })   
+            history.push('/dashboard')
+        })
+        .catch(err => 
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
+}
+
+// Remove an education credential
+export const removeEducationCredential = id => dispatch => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, remove credential!'
+    }).then((result) => {
+        if (result.value) {
+            axios.delete(`/api/profile/education/${id}`)
+                .then(res =>
+                    dispatch({
+                        type: GET_PROFILE,
+                        payload: res.data
+                    })
+                )
+                .catch(err =>
+                    dispatch({
+                        type: GET_ERRORS,
+                        payload: err.response.data
+                    })
+                )
+            Swal.fire(
+                'Deleted!',
+                'The credential has been deleted.',
+                'success'
+            )
+        }
+    })
+}
+
+// Remove an experience credential
+export const removeExperienceCredential = id => dispatch => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, remove credential!'
+    }).then((result) => {
+        if (result.value) {
+            axios.delete(`/api/profile/experience/${id}`)
+                .then(res =>
+                    dispatch({
+                        type: GET_PROFILE,
+                        payload: res.data
+                    })
+                )
+                .catch(err =>
+                    dispatch({
+                        type: GET_ERRORS,
+                        payload: err.response.data
+                    })
+                )
+            Swal.fire(
+                'Deleted!',
+                'The credential has been deleted.',
+                'success'
+            )
+        }
+    })
+}
+
 // Delete full account
 export const deleteAccount = () => dispatch => {
     Swal.fire({

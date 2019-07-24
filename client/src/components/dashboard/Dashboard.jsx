@@ -7,6 +7,8 @@ import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
 import Spinner from '../tools/Spinner';
 import ProfileActions from './ProfileActions';
+import ExperienceCredentials from '../profile/ExperienceCredentials';
+import EducationCredentials from '../profile/EducationCredentials';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -32,7 +34,9 @@ class Dashboard extends Component {
               <div className="mt-3">
                 <h4 className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}> {user.name} </Link>- {profile.status}</h4>
                 <ProfileActions />
-                {/* TODO: experience and education */}
+                <ExperienceCredentials experience={profile.experience} />
+                <EducationCredentials education={profile.education} />
+                <hr className="mx-100" />
                 <div style={{marginBottom: '60px'}}>
                   <button onClick={this.onDeleteAccount.bind(this)} className="btn btn-danger">Delete Account</button>
                 </div>
