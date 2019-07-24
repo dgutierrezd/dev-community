@@ -124,7 +124,7 @@ const CreateProfile = props => {
                             })} 
                             name="status" onChange={e => saveStatus(e.target.value)}>
                             {statusArray.map(stat => (
-                                <option value={stat.value}>{stat.text}</option>
+                                <option key={stat.value} value={stat.value}>{stat.text}</option>
                             ))}
                         </select>
                         {error.status && (<div className="invalid-feedback">{error.status}</div>)}

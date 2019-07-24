@@ -32,12 +32,12 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     .populate('user', ['name', 'avatar'])
     .then(profile => {
       if(!profile) {
-        errors.noprofile = 'There is not profile for this user.'
-        return res.status(404).json(errors);
-      }
-      res.json(profile)
+        errors.noprofile = 'There is no profile for this user.';
+        res.status(404).json(errors);
+      } else
+        res.json(profile)
     })
-    .catch(err => res.status(404).json(err));
+  .catch(err => res.status(404).json(err))
 });
 
 // @route  GET api/profile/all
@@ -64,7 +64,7 @@ router.get('/all', (req, res) => {
 router.get('/handle/:handle', (req, res) => {
   const errors = {};
   Profile.findOne({handle: req.params.handle})
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name', 'avatar', 'email'])
     .then(profile => {
       if(!profile) {
         errors.noprofile = 'There is no profile for this user.';
@@ -205,7 +205,6 @@ router.post('/education', passport.authenticate('jwt', {session: false}), (req, 
         fieldOfStudy: req.body.fieldOfStudy,
         yearStart: req.body.yearStart,
         yearFinish: req.body.yearFinish,
-        current: req.body.current,
         description: req.body.description
       }
        

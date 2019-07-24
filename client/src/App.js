@@ -23,6 +23,8 @@ import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
 import AddExperience from './components/profile/AddExperience';
 import AddEducation from './components/profile/AddEducation';
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile-info/Profile';
 
 
 // Check for token
@@ -45,6 +47,8 @@ function App() {
           <div className="container">
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/profiles' component={Profiles} />     
+            <Route exact path='/profile/:handle' component={Profile} />            
             <Switch>
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
             </Switch>
@@ -52,7 +56,7 @@ function App() {
               <PrivateRoute exact path='/profile/create' component={CreateProfile} />
             </Switch>
             <Switch>
-              <PrivateRoute exact path='/profile/edit' component={EditProfile} />
+              <PrivateRoute exact path='/edit-profile' component={EditProfile} />
             </Switch>
             <Switch>
               <PrivateRoute exact path='/experience/new' component={AddExperience} />
