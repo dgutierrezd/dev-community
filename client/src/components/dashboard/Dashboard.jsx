@@ -48,7 +48,7 @@ class Dashboard extends Component {
                 <div className="col-md-6 mt-3">
                     <h3 className="lead text-muted">Welcome {user.name} to our community</h3>
                     <h6 className="font-weight-normal">You have to create a profile first.</h6>
-                    <Link to='/profile/create' className="btn btn-lg btn-info">
+                    <Link to='/create/profile' className="btn btn-lg btn-info">
                         Create Profile
                     </Link>
                 </div>
