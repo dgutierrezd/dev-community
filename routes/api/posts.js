@@ -146,7 +146,7 @@ router.post('/comment/:id', passport.authenticate('jwt', {session: false}), (req
       }
 
       // Add to comments array
-      post.comments.push(newComment);
+      post.comments.unshift(newComment);
 
       // Save
       post.save().then(post => res.json(post));

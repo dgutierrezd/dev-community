@@ -31,6 +31,11 @@ const NavBar = props => {
             </ul>
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
+                    <Link className="nav-link" to='/feed'>
+                        Posts Feed
+                    </Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to='/dashboard'>
                         <img className="rounded-circle" src={user.avatar} alt={user.name} title="Gravatar" style={{ width: '25px', marginRight: '5px' }} />{' '}
                         {user.name}

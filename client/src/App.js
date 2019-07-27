@@ -26,6 +26,8 @@ import AddEducation from './components/profile/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile-info/Profile';
 import NotFound from './components/tools/NotFound';
+import Posts from './components/posts/Posts';
+import Post from './components/post-info/Post';
 
 
 // Check for token
@@ -64,6 +66,12 @@ function App() {
             </Switch>
             <Switch>
               <PrivateRoute exact path='/education/new' component={AddEducation} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path='/feed' component={Posts} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path='/posts/:id' component={Post} />
             </Switch>
 
             <Route exact path='/profile/:handle' component={Profile} />  
