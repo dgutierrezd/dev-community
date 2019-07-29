@@ -1,2 +1,3 @@
 /node_modules
 package-log.json
+/config/keys_dev.js
